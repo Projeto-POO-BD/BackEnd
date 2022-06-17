@@ -29,11 +29,11 @@ public class RepertorioModel {
     )
     private Set<MusicaModel> musicasNoRepertorio = new HashSet<>();
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,10 +51,6 @@ public class RepertorioModel {
 
     public void setQtdMusicas(int qtdMusicas) {
         this.qtdMusicas = qtdMusicas;
-    }
-
-    public Set<MusicaModel> getMusicasNoRepertorio() {
-        return musicasNoRepertorio;
     }
 
     public UsuarioModel getUsuario() {

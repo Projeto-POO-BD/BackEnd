@@ -1,6 +1,7 @@
 package com.api.projeto_poobd.controllers;
 
 
+import com.api.projeto_poobd.models.RepertorioModel;
 import com.api.projeto_poobd.models.ShowsModel;
 import com.api.projeto_poobd.repositories.ShowsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +17,19 @@ public class ShowsController {
     ShowsRepository showsRepository;
 
     @GetMapping
-    List<ShowsModel> getShows(){
-
+    public List<ShowsModel> getShows(){
         return showsRepository.findAll();
-
     }
 
     @PostMapping
-    ShowsModel createMusica(@RequestBody ShowsModel musica) {
-        return showsRepository.save(musica);
+    public void createShow(@RequestBody ShowsModel show) {
+        showsRepository.save(show);
     }
+//    @PostMapping
+//    public void createRepertorio(@RequestBody RepertorioModel repertorio) {
+//
+//        repertorioRepository.save(repertorio);
+//    }
 
 
 }

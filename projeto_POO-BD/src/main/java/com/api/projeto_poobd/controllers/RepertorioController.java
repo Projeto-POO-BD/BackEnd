@@ -1,6 +1,7 @@
 package com.api.projeto_poobd.controllers;
 
 
+import com.api.projeto_poobd.models.MusicaModel;
 import com.api.projeto_poobd.models.RepertorioModel;
 import com.api.projeto_poobd.repositories.MusicaRepository;
 import com.api.projeto_poobd.repositories.RepertorioRepository;
@@ -21,8 +22,9 @@ public class RepertorioController {
     @Autowired
     MusicaRepository musicaRepository;
 
+
     @GetMapping
-    List<RepertorioModel> getRepositorio(){
+    public List<RepertorioModel> getRepertorio() {
 
         return repertorioRepository.findAll();
 
@@ -37,8 +39,27 @@ public class RepertorioController {
 
     @Transactional
     @PostMapping
-    RepertorioModel createMusica(@RequestBody RepertorioModel musica) {
-        return repertorioRepository.save(musica);
+    public void createRepertorio(@RequestBody RepertorioModel repertorio) {
+        repertorioRepository.save(repertorio);
+    }
+
+    @PutMapping("/{repertorioId}/musica/{musicaId}")
+    public void addMusicaToRepertorio(
+            @PathVariable Integer repertorioId,
+            @PathVariable Integer musicaId
+    ) {
+        RepertorioModel repertorio = repertorioRepository.findById(repertorioId).get();
+        MusicaModel musica = musicaRepository.findById(musicaId).get();
+        repertorio.getMusicasNoRepertorio().add(musica);
+        repertorio.setQtdMusicas(repertorio.getQtdMusicas()+1);
+         repertorioRepository.save(repertorio);
+    }
+    
+    @Transactional
+    @DeleteMapping("/{id}")
+     public void deleteRepertorio(@PathVariable(value = "id") Integer id){
+        RepertorioModel repertorio = repertorioRepository.findById(id).get();
+         repertorioRepository.delete(repertorio);
     }
 
 }

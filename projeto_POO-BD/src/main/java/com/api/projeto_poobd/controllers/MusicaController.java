@@ -9,25 +9,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/musica")
-
-
 public class MusicaController {
 
     @Autowired
     MusicaRepository musicaRepository;
 
     @GetMapping
-    List<MusicaModel> getMusicas(){
+    public List<MusicaModel> getMusicas(){
 
         return musicaRepository.findAll();
-
     }
 
     @PostMapping
-    MusicaModel createMusica(@RequestBody MusicaModel musica) {
-        return musicaRepository.save(musica);
+    public void createMusica(@RequestBody MusicaModel musica) {
+        musicaRepository.save(musica);
     }
-
-
-
 }
