@@ -7,6 +7,9 @@ import javax.validation.constraints.NotNull;
 public class ShowsModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
     @NotNull
     private String data;
 
@@ -14,8 +17,16 @@ public class ShowsModel {
     private String local;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuarioId", referencedColumnName = "email")
-    private UsuarioModel usuario;
+    @JoinColumn(name = "usuarioId", referencedColumnName = "id")
+    private UsuarioModel usuarioShow;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getData() {
         return data;
@@ -34,7 +45,7 @@ public class ShowsModel {
     }
 
     public UsuarioModel getUsuario() {
-        return usuario;
+        return usuarioShow;
     }
 
 }

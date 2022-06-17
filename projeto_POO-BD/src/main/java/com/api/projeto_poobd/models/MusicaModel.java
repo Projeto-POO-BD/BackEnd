@@ -1,5 +1,7 @@
 package com.api.projeto_poobd.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.*;
@@ -8,8 +10,8 @@ import java.util.*;
 public class MusicaModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     @NotNull
     private String nome;
     @NotNull
@@ -17,7 +19,7 @@ public class MusicaModel {
     @NotNull
     private String genero;
 
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "musicasNoRepertorio")
     private Set<RepertorioModel> repertorios = new HashSet<>();
 

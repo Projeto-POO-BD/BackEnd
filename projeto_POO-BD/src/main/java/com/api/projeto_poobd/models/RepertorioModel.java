@@ -10,16 +10,16 @@ import java.util.*;
 public class RepertorioModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     @NotNull
     private String nome;
-    @NotNull
+
     private int qtdMusicas;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuarioId", referencedColumnName = "email")
-    private UsuarioModel usuario;
+    @JoinColumn(name = "usuarioId", referencedColumnName = "id")
+    private UsuarioModel usuarioRepertorio;
 
     @ManyToMany
     @JoinTable(
@@ -58,6 +58,10 @@ public class RepertorioModel {
     }
 
     public UsuarioModel getUsuario() {
-        return usuario;
+        return usuarioRepertorio;
+    }
+
+    public Set<MusicaModel> getMusicasNoRepertorio() {
+        return musicasNoRepertorio;
     }
 }

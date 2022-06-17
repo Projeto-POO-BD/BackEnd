@@ -7,7 +7,9 @@ import com.api.projeto_poobd.repositories.RepertorioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/repertorio")
@@ -26,6 +28,14 @@ public class RepertorioController {
 
     }
 
+    @GetMapping("/{id}")
+    public Optional<RepertorioModel> getRepertorioById(@PathVariable Integer id){
+        return repertorioRepository.findById(id);
+    }
+
+
+
+    @Transactional
     @PostMapping
     RepertorioModel createMusica(@RequestBody RepertorioModel musica) {
         return repertorioRepository.save(musica);
